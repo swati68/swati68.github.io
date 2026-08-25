@@ -30,8 +30,14 @@ npm run preview
 
 ## GitHub Pages
 
-This project is configured as a GitHub Pages user site, served from the root path at `https://<GITHUB_USERNAME>.github.io/`.
+This project is configured as a GitHub Pages user site, served from the root path at `https://swati68.github.io/`.
 
 The GitHub Actions workflow at `.github/workflows/deploy.yml` builds the static site and deploys Vite's `dist` folder to GitHub Pages.
 
 In GitHub, set Pages to deploy from GitHub Actions.
+
+## Metadata Assets
+
+Social preview metadata is configured for `https://swati68.github.io/social-preview.png`.
+
+Add the final 1200x630 PNG at `public/social-preview.png` when a production preview image is ready.

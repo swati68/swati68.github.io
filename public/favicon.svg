@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Swati Singh">
+  <rect width="64" height="64" rx="12" fill="#0b0d10" />
+  <path d="M18 42h18c5.1 0 8-2.5 8-6.4 0-3.2-1.9-5-6.2-6.1l-9.5-2.4c-6.1-1.5-9.3-5.1-9.3-10.2C19 10.7 24.4 7 32.2 7c5.4 0 10.1 1.5 13.4 4.2l-3.1 5.3c-2.7-2.1-6.2-3.2-10.3-3.2-4.3 0-6.8 1.8-6.8 4.7 0 2.6 1.8 4.2 5.8 5.2l9.4 2.4C47.1 27.3 50 30.7 50 36.1 50 43.5 44 48.5 35.1 48.5H18V42Z" fill="#67d5ff" />
+  <path d="M14 54h36" stroke="#a78bfa" stroke-width="4" stroke-linecap="round" />
+</svg>
