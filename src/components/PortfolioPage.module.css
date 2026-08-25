@@ -464,90 +464,88 @@
   margin-top: var(--space-2);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
-  background: color-mix(in srgb, var(--surface), transparent 24%);
+  background:
+    radial-gradient(circle at 50% 22%, var(--accent-primary-soft), transparent 7rem),
+    radial-gradient(circle at 18% 78%, var(--accent-secondary-soft), transparent 6rem),
+    radial-gradient(circle at 82% 78%, var(--accent-success-soft), transparent 6rem),
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px),
+    color-mix(in srgb, var(--editor-surface), var(--surface) 22%);
+  background-size:
+    auto,
+    auto,
+    auto,
+    18px 18px,
+    18px 18px,
+    auto;
   overflow: hidden;
 }
 
-.graphLines {
+.focusGraph::before {
+  content: '';
   position: absolute;
-  inset: 0;
+  inset: var(--space-3);
+  border: 1px solid var(--border-subtle);
+  border-radius: calc(var(--radius-md) - 0.12rem);
+  opacity: 0.72;
+  pointer-events: none;
+}
+
+.graphArtwork {
+  position: relative;
+  z-index: 1;
   width: 100%;
   height: 100%;
 }
 
-.graphLines path {
+.graphFill {
+  fill: color-mix(in srgb, var(--accent-primary), transparent 94%);
+  opacity: 0;
+  animation: fadeIn 420ms 860ms var(--motion-ease) forwards;
+}
+
+.graphEdge {
   fill: none;
   stroke: color-mix(in srgb, var(--accent-primary), transparent 44%);
   stroke-dasharray: 520;
   stroke-dashoffset: 520;
   stroke-linejoin: round;
   stroke-width: 1.5;
+  vector-effect: non-scaling-stroke;
   animation: drawLine 620ms 760ms var(--motion-ease) forwards;
 }
 
-.graphPoint {
-  position: absolute;
-  z-index: 1;
-  width: 0.72rem;
-  height: 0.72rem;
-  border: 2px solid currentColor;
-  border-radius: var(--radius-pill);
-  background: var(--editor-surface);
+.graphNode {
   opacity: 0;
-  transform: translate(-50%, -50%) scale(0.92);
-  animation: graphPointIn 360ms var(--motion-ease) forwards;
+  transform-origin: center;
+  animation: nodeIn 360ms var(--motion-ease) forwards;
 }
 
-.graphPointSystems {
-  top: 27.25%;
-  left: 50%;
-  color: var(--accent-primary);
-  animation-delay: 860ms;
+.graphNode circle {
+  fill: var(--editor-surface);
+  stroke: currentColor;
+  stroke-width: 2;
+  vector-effect: non-scaling-stroke;
 }
 
-.graphPointAi {
-  top: 70.45%;
-  left: 21.1%;
-  color: var(--accent-secondary);
-  animation-delay: 960ms;
-}
-
-.graphPointResearch {
-  top: 70.45%;
-  left: 78.9%;
-  color: var(--accent-success);
-  animation-delay: 1060ms;
-}
-
-.graphLabel {
-  position: absolute;
-  z-index: 2;
-  color: var(--text-primary);
+.graphNode text {
+  fill: currentColor;
   font-family: var(--font-mono);
   font-size: var(--font-size-xs);
   font-weight: 850;
-  opacity: 0;
-  animation: fadeIn 360ms var(--motion-ease) forwards;
 }
 
 .graphSystems {
-  top: 0.95rem;
-  left: 50%;
   color: var(--accent-primary);
-  transform: translateX(-50%);
   animation-delay: 860ms;
 }
 
 .graphAi {
-  bottom: 1.2rem;
-  left: 9%;
   color: var(--accent-secondary);
   animation-delay: 960ms;
 }
 
 .graphResearch {
-  right: 9%;
-  bottom: 1.2rem;
   color: var(--accent-success);
   animation-delay: 1060ms;
 }
@@ -621,13 +619,16 @@
 }
 
 .focusCard {
+  --focus-accent: var(--accent-primary);
   position: relative;
   display: grid;
   gap: var(--space-2);
   padding: var(--space-4);
-  border: 1px solid var(--border);
+  padding-left: calc(var(--space-4) + 0.4rem);
+  border: 1px solid color-mix(in srgb, var(--focus-accent), transparent 74%);
   border-radius: var(--radius-md);
   background:
+    radial-gradient(circle at 100% 0%, color-mix(in srgb, var(--focus-accent), transparent 86%), transparent 8.5rem),
     linear-gradient(90deg, var(--editor-gutter) 0 1.35rem, transparent 1.35rem),
     var(--surface);
   overflow: hidden;
@@ -637,6 +638,18 @@
     transform var(--transition-fast);
 }
 
+.focusCard:nth-child(1) {
+  --focus-accent: var(--accent-primary);
+}
+
+.focusCard:nth-child(2) {
+  --focus-accent: var(--accent-secondary);
+}
+
+.focusCard:nth-child(3) {
+  --focus-accent: var(--accent-success);
+}
+
 .focusCard::before {
   content: '';
   position: absolute;
@@ -644,24 +657,17 @@
   bottom: var(--space-4);
   left: 0.67rem;
   width: 1px;
-  background: color-mix(in srgb, var(--accent-primary), transparent 48%);
-}
-
-.focusCard:nth-child(2)::before {
-  background: color-mix(in srgb, var(--accent-secondary), transparent 48%);
-}
-
-.focusCard:nth-child(3)::before {
-  background: color-mix(in srgb, var(--accent-success), transparent 48%);
+  background: color-mix(in srgb, var(--focus-accent), transparent 38%);
 }
 
 .focusCard:hover {
-  border-color: var(--border-strong);
+  border-color: color-mix(in srgb, var(--focus-accent), transparent 46%);
   background: var(--surface-elevated);
   transform: translateY(-2px);
 }
 
 .focusCard h3 {
+  color: var(--focus-accent);
   font-size: var(--font-size-md);
   line-height: 1.35;
 }
@@ -673,13 +679,27 @@
 }
 
 .infoBlock {
+  position: relative;
   display: grid;
   gap: var(--space-1);
   padding: var(--space-5);
-  border: 1px solid var(--border);
+  border: 1px solid color-mix(in srgb, var(--accent-blue-gray), transparent 68%);
   border-radius: var(--radius-md);
-  background: var(--editor-surface);
+  background:
+    radial-gradient(circle at 100% 0%, color-mix(in srgb, var(--accent-blue-gray), transparent 88%), transparent 10rem),
+    var(--editor-surface);
   box-shadow: var(--shadow-soft);
+  overflow: hidden;
+}
+
+.infoBlock::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary), var(--accent-rust));
 }
 
 .infoBlock div {
@@ -695,7 +715,7 @@
 }
 
 .infoBlock dt {
-  color: var(--text-muted);
+  color: var(--accent-warning);
   font-family: var(--font-mono);
   font-size: var(--font-size-xs);
   font-weight: 850;
@@ -1432,43 +1452,64 @@
   max-width: none;
   align-content: start;
   font-size: var(--font-size-lg);
-  padding: var(--space-5);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  background: var(--surface);
-  box-shadow: var(--shadow-soft);
+  padding: var(--space-2) 0 0;
+}
+
+.contactBlock p:first-child {
+  color: var(--text-primary);
 }
 
 .contactActions {
+  width: min(100%, 28rem);
   display: grid;
   gap: var(--space-3);
-  margin-top: var(--space-2);
+  justify-self: center;
+  margin-top: var(--space-4);
 }
 
 .contactButton {
+  --contact-accent: var(--accent-primary);
   width: 100%;
-  min-height: 4.25rem;
-  justify-content: flex-start;
-  padding: 0 var(--space-5);
-  border: 1px solid var(--border);
+  min-height: 5.25rem;
+  justify-content: center;
+  padding: var(--space-4) var(--space-5);
+  border: 1px solid color-mix(in srgb, var(--contact-accent), transparent 68%);
   border-radius: var(--radius-sm);
-  background: var(--surface);
+  background:
+    radial-gradient(circle at 100% 0%, color-mix(in srgb, var(--contact-accent), transparent 86%), transparent 8rem),
+    var(--surface);
   color: var(--text-primary);
-  font-size: var(--font-size-md);
+  font-size: var(--font-size-xl);
+  font-weight: 820;
+  text-align: center;
+}
+
+.contactActions .contactButton:nth-child(1) {
+  --contact-accent: var(--accent-primary);
+}
+
+.contactActions .contactButton:nth-child(2) {
+  --contact-accent: var(--accent-blue-gray);
+}
+
+.contactActions .contactButton:nth-child(3) {
+  --contact-accent: var(--accent-rust);
 }
 
 .contactButton:hover {
-  border-color: var(--border-strong);
+  border-color: color-mix(in srgb, var(--contact-accent), transparent 42%);
   background: var(--surface-elevated);
 }
 
 .contactButton .actionText {
   gap: var(--space-3);
+  justify-content: center;
 }
 
 .contactButton .actionIcon {
-  width: 1.18rem;
-  height: 1.18rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  color: var(--contact-accent);
 }
 
 .contactForm {
@@ -1478,9 +1519,11 @@
   min-height: 100%;
   padding: var(--space-6);
   padding-left: calc(var(--space-6) + 0.75rem);
-  border: 1px solid var(--border);
+  border: 1px solid color-mix(in srgb, var(--accent-secondary), transparent 70%);
   border-radius: var(--radius-md);
   background:
+    radial-gradient(circle at 100% 0%, var(--accent-secondary-soft), transparent 11rem),
+    radial-gradient(circle at 0% 100%, var(--accent-primary-soft), transparent 12rem),
     linear-gradient(90deg, var(--editor-gutter) 0 1.5rem, transparent 1.5rem),
     var(--editor-surface);
   box-shadow: var(--shadow-soft);
@@ -1503,7 +1546,7 @@
 }
 
 .contactForm label {
-  color: var(--text-muted);
+  color: var(--accent-secondary);
   font-family: var(--font-mono);
   font-size: var(--font-size-xs);
   font-weight: 850;
@@ -1564,6 +1607,7 @@
   border-top: 1px solid var(--border);
   color: var(--text-muted);
   font-size: var(--font-size-xs);
+  text-align: center;
 }
 
 .footer p {
@@ -1653,18 +1697,6 @@
   to {
     opacity: 1;
     transform: translateY(0) scale(1);
-  }
-}
-
-@keyframes graphPointIn {
-  from {
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(0.92);
-  }
-
-  to {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
   }
 }
 
@@ -1889,6 +1921,10 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .contactActions {
+    width: 100%;
+  }
+
   .timeline::before {
     left: 0.3rem;
   }
@@ -2046,9 +2082,9 @@
   .heroStaggerSeven,
   .heroStaggerEight,
   .heroStaggerNine,
-  .graphLines path,
-  .graphPoint,
-  .graphLabel {
+  .graphFill,
+  .graphEdge,
+  .graphNode {
     animation: none;
     opacity: 1;
   }
@@ -2061,7 +2097,7 @@
     stroke-dashoffset: 0;
   }
 
-  .graphLines path {
+  .graphEdge {
     stroke-dashoffset: 0;
   }
 

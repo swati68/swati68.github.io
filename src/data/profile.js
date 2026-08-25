@@ -103,7 +103,7 @@ export const contact = {
   label: '06 / CONTACT',
   heading: 'Contact',
   paragraphs: [
-    "I'm currently exploring Spring 2027 Software Engineering and AI/ML opportunities.",
+    "I'm currently exploring Spring 2027 Software Engineering and AI/ML Internships and New Grad 2027 Full Time Opportunities.",
     "If you're building something interesting, I'd love to hear about it.",
   ],
   formSubject: 'Portfolio inquiry',
@@ -112,5 +112,4 @@ export const contact = {
 export const footer = {
   copyright: 'Swati Singh © 2026',
   stack: 'Built with React + Vite',
-  hosting: 'Hosted on GitHub Pages',
 }

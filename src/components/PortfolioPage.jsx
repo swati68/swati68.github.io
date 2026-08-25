@@ -324,19 +324,28 @@ function HeroVisual() {
       </div>
 
       <div className={styles.focusGraph} aria-hidden="true">
-        <svg className={styles.graphLines} viewBox="0 0 360 176">
-          <path d="M180 48 76 124H284Z" />
+        <svg className={styles.graphArtwork} viewBox="0 0 360 176">
+          <path className={styles.graphFill} d="M180 46 76 126H284Z" />
+          <path className={styles.graphEdge} d="M180 46 76 126H284Z" />
+          <g className={`${styles.graphNode} ${styles.graphSystems}`}>
+            <circle cx="180" cy="46" r="7" />
+            <text x="180" y="25" textAnchor="middle">
+              Systems
+            </text>
+          </g>
+          <g className={`${styles.graphNode} ${styles.graphAi}`}>
+            <circle cx="76" cy="126" r="7" />
+            <text x="76" y="154" textAnchor="middle">
+              AI / ML
+            </text>
+          </g>
+          <g className={`${styles.graphNode} ${styles.graphResearch}`}>
+            <circle cx="284" cy="126" r="7" />
+            <text x="284" y="154" textAnchor="middle">
+              Research
+            </text>
+          </g>
         </svg>
-        <span className={`${styles.graphPoint} ${styles.graphPointSystems}`} />
-        <span className={`${styles.graphPoint} ${styles.graphPointAi}`} />
-        <span className={`${styles.graphPoint} ${styles.graphPointResearch}`} />
-        <span className={`${styles.graphLabel} ${styles.graphSystems}`}>
-          Systems
-        </span>
-        <span className={`${styles.graphLabel} ${styles.graphAi}`}>AI / ML</span>
-        <span className={`${styles.graphLabel} ${styles.graphResearch}`}>
-          Research
-        </span>
       </div>
     </div>
   )
@@ -804,9 +813,7 @@ function Footer() {
     <footer className={styles.footer}>
       <div>
         <p>{footer.copyright}</p>
-        <p>
-          {footer.stack} · {footer.hosting}
-        </p>
+        <p>{footer.stack}</p>
       </div>
     </footer>
   )
