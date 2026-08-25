@@ -5,10 +5,9 @@ import {
   about,
   contact,
   contactActions,
-  currently,
   footer,
-  footerLinks,
   hero,
+  heroActions,
   navItems,
   profileLinks,
 } from '../data/profile.js'
@@ -26,13 +25,76 @@ function StatusDot() {
   return <span className={styles.statusDot} aria-hidden="true" />
 }
 
+function ActionIcon({ name }) {
+  if (!name) {
+    return null
+  }
+
+  const icons = {
+    projects: (
+      <>
+        <rect x="4" y="4" width="6" height="6" rx="1.2" />
+        <rect x="14" y="4" width="6" height="6" rx="1.2" />
+        <rect x="4" y="14" width="6" height="6" rx="1.2" />
+        <rect x="14" y="14" width="6" height="6" rx="1.2" />
+      </>
+    ),
+    resume: (
+      <>
+        <path d="M7 3.5h7l4 4V20.5H7z" />
+        <path d="M14 3.5v4h4" />
+        <path d="M9.5 12h5" />
+        <path d="M9.5 15.5H15" />
+      </>
+    ),
+    linkedin: (
+      <>
+        <rect x="3.5" y="3.5" width="17" height="17" rx="2.2" />
+        <path d="M8 10v6.5" />
+        <path d="M8 7.6v.1" />
+        <path d="M11.5 16.5V10" />
+        <path d="M11.5 12.8c.5-1.8 4.5-2.2 4.5 1.2v2.5" />
+      </>
+    ),
+    github: (
+      <>
+        <path d="M9 19.5c-4 1.2-4-2-5.6-2.4" />
+        <path d="M15 21v-3.4c0-.9.3-1.5.8-2 2.7-.3 5.5-1.3 5.5-6A4.7 4.7 0 0 0 20 6.3c.1-.3.6-1.7-.1-3.3 0 0-1.1-.3-3.5 1.3A12 12 0 0 0 10 4.3C7.6 2.7 6.5 3 6.5 3c-.7 1.6-.2 3-.1 3.3A4.7 4.7 0 0 0 5 9.6c0 4.7 2.8 5.7 5.5 6 .4.4.7 1 .8 1.8V21" />
+      </>
+    ),
+    email: (
+      <>
+        <rect x="3.5" y="5.5" width="17" height="13" rx="2" />
+        <path d="m5 7 7 5.4L19 7" />
+      </>
+    ),
+    send: (
+      <>
+        <path d="M4 12 20 4l-5.2 16-3.1-6.9z" />
+        <path d="M20 4 11.7 13.1" />
+      </>
+    ),
+  }
+
+  return (
+    <svg
+      className={styles.actionIcon}
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+    >
+      {icons[name]}
+    </svg>
+  )
+}
+
 function ExternalAction({
   ariaLabel,
   children,
   className = '',
   download = false,
   href,
-  icon = '↗',
+  iconName,
+  trailingIcon = '↗',
 }) {
   const opensNewTab =
     Boolean(href) &&
@@ -49,10 +111,15 @@ function ExternalAction({
 
   const content = (
     <>
-      <span>{children}</span>
-      <span className={styles.actionArrow} aria-hidden="true">
-        {icon}
+      <span className={styles.actionText}>
+        <ActionIcon name={iconName} />
+        <span>{children}</span>
       </span>
+      {trailingIcon ? (
+        <span className={styles.actionArrow} aria-hidden="true">
+          {trailingIcon}
+        </span>
+      ) : null}
     </>
   )
 
@@ -155,7 +222,7 @@ function Navbar({ activeId, hasScrolled, onToggleTheme, theme }) {
     >
       <div className={styles.navbarInner}>
         <a className={styles.brand} href="#top" onClick={() => setIsOpen(false)}>
-          S.
+          Swati Singh
         </a>
 
         <nav
@@ -184,9 +251,6 @@ function Navbar({ activeId, hasScrolled, onToggleTheme, theme }) {
 
         <div className={styles.navActions}>
           <ThemeToggle theme={theme} onToggleTheme={onToggleTheme} />
-          <ExternalAction className={styles.resumeNav} href={profileLinks.resume}>
-            Resume
-          </ExternalAction>
 
           <button
             aria-controls="mobile-navigation"
@@ -220,20 +284,16 @@ function Navbar({ activeId, hasScrolled, onToggleTheme, theme }) {
               {item.label}
             </a>
           ))}
-          <ExternalAction className={styles.resumeNav} href={profileLinks.resume}>
-            Resume
-          </ExternalAction>
         </nav>
       ) : null}
     </header>
   )
 }
 
-function SectionHeader({ eyebrow, heading, label }) {
+function SectionHeader({ eyebrow, heading }) {
   return (
     <header className={styles.sectionHeader}>
       {eyebrow ? <p className={styles.eyebrow}>{eyebrow}</p> : null}
-      <p className={styles.sectionLabel}>{label}</p>
       <h2>{heading}</h2>
     </header>
   )
@@ -269,11 +329,31 @@ function HeroVisual() {
         </div>
       </div>
 
-      <div className={styles.focusGraph} aria-hidden="true">
-        <span className={styles.graphSystems}>Systems</span>
-        <span className={styles.graphAi}>AI / ML</span>
-        <span className={styles.graphResearch}>Research</span>
-      </div>
+      <svg
+        className={styles.focusGraph}
+        viewBox="0 0 360 176"
+        aria-hidden="true"
+      >
+        <path className={styles.graphEdge} d="M180 42 74 132H286Z" />
+        <g className={`${styles.graphNode} ${styles.graphSystems}`}>
+          <circle cx="180" cy="42" r="7" />
+          <text x="180" y="23" textAnchor="middle">
+            Systems
+          </text>
+        </g>
+        <g className={`${styles.graphNode} ${styles.graphAi}`}>
+          <circle cx="74" cy="132" r="7" />
+          <text x="74" y="157" textAnchor="middle">
+            AI / ML
+          </text>
+        </g>
+        <g className={`${styles.graphNode} ${styles.graphResearch}`}>
+          <circle cx="286" cy="132" r="7" />
+          <text x="286" y="157" textAnchor="middle">
+            Research
+          </text>
+        </g>
+      </svg>
     </div>
   )
 }
@@ -282,76 +362,43 @@ function HeroSection() {
   return (
     <section className={styles.heroSection} id="top" aria-labelledby="hero-title">
       <div className={styles.heroCopy}>
-        <p className={`${styles.eyebrow} ${styles.heroStaggerOne}`}>
-          {hero.eyebrow}
-        </p>
-        <h1 id="hero-title" className={styles.heroStaggerTwo}>
+        <h1 id="hero-title" className={styles.heroStaggerOne}>
           {hero.title}
         </h1>
-        <p className={`${styles.heroStatement} ${styles.heroStaggerThree}`}>
+        <p className={`${styles.heroStatement} ${styles.heroStaggerTwo}`}>
           {hero.statement}
         </p>
-        <p className={`${styles.heroDescription} ${styles.heroStaggerFour}`}>
+        <p className={`${styles.heroDescription} ${styles.heroStaggerThree}`}>
           {hero.description}
         </p>
 
-        <p className={`${styles.heroStatus} ${styles.heroStaggerFive}`}>
+        <p className={`${styles.heroStatus} ${styles.heroStaggerFour}`}>
           <StatusDot />
           {hero.status}
         </p>
 
-        <p className={`${styles.heroFocus} ${styles.heroStaggerSix}`}>
-          {hero.focus.join(' · ')}
-        </p>
-
-        <div className={`${styles.heroActions} ${styles.heroStaggerSeven}`}>
-          <a className={styles.primaryButton} href="#projects">
-            <span>View Projects</span>
-            <span aria-hidden="true">↓</span>
-          </a>
-          <ExternalAction
-            className={styles.secondaryButton}
-            href={profileLinks.resume}
-          >
-            Resume
-          </ExternalAction>
+        <div className={`${styles.heroActions} ${styles.heroStaggerFive}`}>
+          {heroActions.map((action) => (
+            <ExternalAction
+              className={
+                action.id === 'projects'
+                  ? styles.primaryButton
+                  : styles.secondaryButton
+              }
+              href={action.href}
+              iconName={action.icon}
+              key={action.id}
+              trailingIcon={action.id === 'projects' ? '↓' : '↗'}
+            >
+              {action.label}
+            </ExternalAction>
+          ))}
         </div>
-
-        <nav
-          className={`${styles.profileLinks} ${styles.heroStaggerEight}`}
-          aria-label="Profile links"
-        >
-          <ExternalAction href={profileLinks.github}>GitHub</ExternalAction>
-          <ExternalAction href={profileLinks.linkedin}>
-            LinkedIn
-          </ExternalAction>
-          <ExternalAction
-            href={profileLinks.email ? `mailto:${profileLinks.email}` : ''}
-          >
-            Email
-          </ExternalAction>
-        </nav>
       </div>
 
-      <div className={styles.heroStaggerNine}>
+      <div className={styles.heroStaggerSix}>
         <HeroVisual />
       </div>
-    </section>
-  )
-}
-
-function CurrentlyStrip() {
-  return (
-    <section className={styles.currentlyStrip} aria-label="Current status">
-      <span>CURRENTLY</span>
-      <ul>
-        {currently.map((item, index) => (
-          <li key={item}>
-            {index === currently.length - 1 ? <StatusDot /> : null}
-            {item}
-          </li>
-        ))}
-      </ul>
     </section>
   )
 }
@@ -359,13 +406,25 @@ function CurrentlyStrip() {
 function AboutSection() {
   return (
     <section className={styles.section} data-reveal id="about">
-      <SectionHeader heading={about.heading} label={about.label} />
+      <SectionHeader heading={about.heading} />
 
       <div className={styles.aboutGrid}>
-        <div className={styles.aboutCopy}>
-          {about.paragraphs.map((paragraph) => (
-            <p key={paragraph}>{paragraph}</p>
-          ))}
+        <div className={styles.aboutMain}>
+          <div className={styles.aboutCopy}>
+            {about.paragraphs.map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
+          </div>
+
+          <div className={styles.aboutFocusGrid}>
+            {about.focusCards.map((card) => (
+              <article className={styles.focusCard} key={card.title}>
+                <p>{card.meta}</p>
+                <h3>{card.title}</h3>
+                <span>{card.detail}</span>
+              </article>
+            ))}
+          </div>
         </div>
 
         <dl className={styles.infoBlock}>
@@ -384,10 +443,7 @@ function AboutSection() {
 function ExperienceSection() {
   return (
     <section className={styles.section} data-reveal id="experience">
-      <SectionHeader
-        heading={experienceSection.heading}
-        label={experienceSection.label}
-      />
+      <SectionHeader heading={experienceSection.heading} />
 
       <div className={styles.sectionIntro}>
         {experienceSection.intro.map((paragraph) => (
@@ -434,7 +490,6 @@ function ResearchSection() {
       <SectionHeader
         eyebrow={researchHeader.file}
         heading={researchHeader.heading}
-        label={researchHeader.label}
       />
       <p className={styles.sectionIntroSingle}>{researchHeader.intro}</p>
 
@@ -564,8 +619,8 @@ function ProjectVisual({ type }) {
 
 function ProjectCard({ project }) {
   const links = [
-    project.demoUrl ? { label: 'demo', href: project.demoUrl } : null,
-    project.githubUrl ? { label: 'github', href: project.githubUrl } : null,
+    project.demoUrl ? { label: 'Demo', href: project.demoUrl } : null,
+    project.githubUrl ? { label: 'GitHub', href: project.githubUrl } : null,
   ].filter(Boolean)
 
   return (
@@ -588,7 +643,9 @@ function ProjectCard({ project }) {
           {links.map((link) => (
             <ExternalAction
               ariaLabel={`${project.name} ${link.label}, opens in a new tab`}
+              className={styles.projectButton}
               href={link.href}
+              iconName={link.label === 'GitHub' ? 'github' : 'projects'}
               key={link.label}
             >
               {link.label}
@@ -603,11 +660,7 @@ function ProjectCard({ project }) {
 function ProjectsSection() {
   return (
     <section className={styles.section} data-reveal id="projects">
-      <SectionHeader
-        heading={projectLibraryHeader.heading}
-        label={projectLibraryHeader.label}
-      />
-      <p className={styles.sectionIntroSingle}>{projectLibraryHeader.intro}</p>
+      <SectionHeader heading={projectLibraryHeader.heading} />
 
       <div className={styles.projectsGrid}>
         {projects.map((project) => (
@@ -626,7 +679,7 @@ function ProjectsSection() {
 function ToolkitSection() {
   return (
     <section className={styles.section} data-reveal id="toolkit">
-      <SectionHeader heading={toolkitHeader.heading} label={toolkitHeader.label} />
+      <SectionHeader heading={toolkitHeader.heading} />
 
       <div className={styles.toolkitOutput}>
         {toolkitGroups.map((group) => (
@@ -652,7 +705,7 @@ function OutsideEditorSection() {
       <ul>
         {outsideEditor.lines.map((line) => (
           <li key={line}>
-            <span aria-hidden="true">→</span>
+            <span aria-hidden="true">·</span>
             {line}
           </li>
         ))}
@@ -662,77 +715,98 @@ function OutsideEditorSection() {
 }
 
 function ContactSection() {
-  const [copyState, setCopyState] = useState('Copy Email')
-  const emailAction = contactActions.find((action) => action.id === 'email')
-  const canCopyEmail = Boolean(emailAction?.copyValue)
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: '',
+  })
 
-  const handleCopyEmail = async () => {
-    if (!emailAction?.copyValue) {
-      return
-    }
+  const handleFieldChange = (event) => {
+    const { name, value } = event.target
+    setFormData((currentData) => ({ ...currentData, [name]: value }))
+  }
 
-    try {
-      await navigator.clipboard.writeText(emailAction.copyValue)
-      setCopyState('copied')
-    } catch {
-      setCopyState('copy failed')
-    }
+  const handleContactSubmit = (event) => {
+    event.preventDefault()
 
-    window.setTimeout(() => setCopyState('Copy Email'), 1800)
+    const subject = encodeURIComponent(contact.formSubject)
+    const body = encodeURIComponent(
+      [
+        `Name: ${formData.name}`,
+        `Email: ${formData.email}`,
+        '',
+        'Message:',
+        formData.message,
+      ].join('\n'),
+    )
+
+    window.location.href = `mailto:${profileLinks.email}?subject=${subject}&body=${body}`
   }
 
   return (
     <section className={styles.section} data-reveal id="contact">
-      <SectionHeader
-        eyebrow={contact.eyebrow}
-        heading={contact.heading}
-        label={contact.label}
-      />
+      <SectionHeader heading={contact.heading} />
 
-      <div className={styles.contactBlock}>
-        {contact.paragraphs.map((paragraph) => (
-          <p key={paragraph}>{paragraph}</p>
-        ))}
-      </div>
+      <div className={styles.contactGrid}>
+        <div className={styles.contactBlock}>
+          {contact.paragraphs.map((paragraph) => (
+            <p key={paragraph}>{paragraph}</p>
+          ))}
 
-      <div className={styles.contactActions}>
-        {contactActions.map((action) => (
-          <ExternalAction
-            download={action.download}
-            href={action.href}
-            key={action.id}
-          >
-            {action.label}
-          </ExternalAction>
-        ))}
+          <div className={styles.contactActions}>
+            {contactActions.map((action) => (
+              <ExternalAction
+                className={styles.contactButton}
+                href={action.href}
+                iconName={action.id}
+                key={action.id}
+                trailingIcon={action.id === 'email' ? '' : '↗'}
+              >
+                {action.label}
+              </ExternalAction>
+            ))}
+          </div>
+        </div>
 
-        {canCopyEmail ? (
-          <button
-            aria-live="polite"
-            aria-label={
-              copyState === 'copied'
-                ? 'Email copied to clipboard'
-                : copyState === 'copy failed'
-                  ? 'Email copy failed'
-                  : 'Copy email address'
-            }
-            className={`${styles.copyButton} ${
-              copyState === 'copied' ? styles.copyButtonCopied : ''
-            }`}
-            onClick={handleCopyEmail}
-            title="Copy email address"
-            type="button"
-          >
-            {copyState}
+        <form className={styles.contactForm} onSubmit={handleContactSubmit}>
+          <div>
+            <label htmlFor="contact-name">Name</label>
+            <input
+              id="contact-name"
+              name="name"
+              onChange={handleFieldChange}
+              required
+              type="text"
+              value={formData.name}
+            />
+          </div>
+          <div>
+            <label htmlFor="contact-email">Email</label>
+            <input
+              id="contact-email"
+              name="email"
+              onChange={handleFieldChange}
+              required
+              type="email"
+              value={formData.email}
+            />
+          </div>
+          <div>
+            <label htmlFor="contact-message">Message</label>
+            <textarea
+              id="contact-message"
+              name="message"
+              onChange={handleFieldChange}
+              required
+              rows="5"
+              value={formData.message}
+            />
+          </div>
+          <button className={styles.primaryButton} type="submit">
+            <ActionIcon name="send" />
+            <span>Send Email</span>
           </button>
-        ) : null}
-        <span className={styles.srOnly} role="status" aria-live="polite">
-          {copyState === 'copied'
-            ? 'Email copied to clipboard'
-            : copyState === 'copy failed'
-              ? 'Email copy failed'
-              : ''}
-        </span>
+        </form>
       </div>
     </section>
   )
@@ -747,14 +821,6 @@ function Footer() {
           {footer.stack} · {footer.hosting}
         </p>
       </div>
-
-      <nav aria-label="Footer links">
-        {footerLinks.map((link) => (
-          <ExternalAction download={link.download} href={link.href} key={link.id}>
-            {link.label}
-          </ExternalAction>
-        ))}
-      </nav>
     </footer>
   )
 }
@@ -778,7 +844,6 @@ function PortfolioPage() {
 
       <main id="main-content">
         <HeroSection />
-        <CurrentlyStrip />
         <AboutSection />
         <ExperienceSection />
         <ResearchSection />

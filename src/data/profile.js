@@ -16,10 +16,10 @@ export const profileLinks = {
 
 export const contactActions = [
   {
-    id: 'email',
-    label: 'Email',
-    href: profileLinks.email ? `mailto:${profileLinks.email}` : '',
-    copyValue: profileLinks.email,
+    id: 'github',
+    label: 'GitHub',
+    href: profileLinks.github,
+    external: true,
   },
   {
     id: 'linkedin',
@@ -28,46 +28,70 @@ export const contactActions = [
     external: true,
   },
   {
-    id: 'github',
-    label: 'GitHub',
-    href: profileLinks.github,
-    external: true,
+    id: 'email',
+    label: 'Email',
+    href: profileLinks.email ? `mailto:${profileLinks.email}` : '',
+  },
+]
+
+export const heroActions = [
+  {
+    id: 'projects',
+    label: 'View Projects',
+    href: '#projects',
+    icon: 'projects',
   },
   {
     id: 'resume',
     label: 'Resume',
     href: profileLinks.resume,
-    download: true,
+    icon: 'resume',
+  },
+  {
+    id: 'linkedin',
+    label: 'LinkedIn',
+    href: profileLinks.linkedin,
+    icon: 'linkedin',
+  },
+  {
+    id: 'github',
+    label: 'GitHub',
+    href: profileLinks.github,
+    icon: 'github',
   },
 ]
 
-export const footerLinks = contactActions.filter(
-  (action) => ['github', 'linkedin'].includes(action.id) && action.href,
-)
-
 export const hero = {
-  eyebrow: 'PROFILE',
   title: "Hi, I'm Swati Singh.",
   statement: 'Software Engineer, graduate student, and AI/ML researcher.',
   description:
     "I spent three years building production backend systems in fintech before moving to New York for my M.S. in Computer Science at NYU. Today, my work spans software systems, machine learning, and healthcare research.",
-  status: 'Open to Spring 2027 opportunities',
-  focus: ['Software Engineering', 'AI/ML', 'Research Engineering'],
+  status: 'Open to Spring 2027 Internship/ New Grad 2027 Opportunities',
 }
-
-export const currently = [
-  'New York',
-  'M.S. CS @ NYU',
-  'Healthcare AI Research',
-  'Open to Spring 2027',
-]
 
 export const about = {
   label: '01 / ABOUT',
   heading: 'About Me',
   paragraphs: [
-    "I'm usually the quieter person in the room, but give me a problem and I can disappear into it for hours.",
-    'I started my career building backend systems at Bajaj Finserv. After three years in industry, I moved to New York for graduate school and gradually found myself working across software engineering, machine learning, and healthcare research.',
+    'I started in backend engineering, where I learned how much good systems work depends on clear interfaces, careful tradeoffs, and calm debugging under production pressure.',
+    'After three years at Bajaj Finserv, I moved to New York for graduate school at NYU. My work now sits across software systems, machine learning, and healthcare research, with a focus on building things that are technically solid and genuinely useful.',
+  ],
+  focusCards: [
+    {
+      title: 'Software Engineering',
+      detail: 'Backend systems, REST APIs, microservices, and production reliability.',
+      meta: 'Java · Systems · APIs',
+    },
+    {
+      title: 'AI / ML',
+      detail: 'Model pipelines, NLP workflows, LLM APIs, and GPU-backed inference.',
+      meta: 'ML · NLP · Inference',
+    },
+    {
+      title: 'Research Engineering',
+      detail: 'Healthcare AI, clinical data, social determinants of health, and evaluation.',
+      meta: 'Healthcare · SDoH · Evaluation',
+    },
   ],
   metadata: [
     { label: 'LOCATION', value: 'New York' },
@@ -80,12 +104,12 @@ export const about = {
 
 export const contact = {
   label: '06 / CONTACT',
-  eyebrow: 'CONTACT DETAILS',
-  heading: 'Want to Talk?',
+  heading: 'Contact',
   paragraphs: [
     "I'm currently exploring Spring 2027 Software Engineering and AI/ML opportunities.",
     "If you're building something interesting, I'd love to hear about it.",
   ],
+  formSubject: 'Portfolio inquiry',
 }
 
 export const footer = {

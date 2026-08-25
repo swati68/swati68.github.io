@@ -31,4 +31,19 @@ export const researchStudies = [
     cohorts: ['MESA', 'Jackson Heart Study'],
     methods: ['Statistical modeling', 'Mediation analysis', 'SDoH'],
   },
+  {
+    id: 'clinical-risk-sdoh-additional',
+    number: '03',
+    title: 'Clinical Risk Prediction + Social Determinants of Health',
+    question:
+      'How does neighborhood context affect prediction of healthcare utilization?',
+    data: 'Insurance claims + neighborhood-level SDoH',
+    methods: [
+      'XGBoost',
+      'SHAP',
+      'Statistical modeling',
+      'Calibration / model evaluation',
+    ],
+    outcomes: ['ER utilization', 'Primary-care utilization'],
+  },
 ]

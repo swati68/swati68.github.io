@@ -3,33 +3,23 @@ export const experienceSection = {
   heading: 'Experience',
   intro: [
     'My path started in production backend systems at Bajaj Finserv and now extends into healthcare AI research at NYU.',
-    'I joined Bajaj as an intern, left as a Senior Software Engineer, and carried that systems mindset into graduate research.',
   ],
 }
 
 export const experienceTimeline = [
   {
-    period: '2022',
-    role: 'Software Engineering Intern',
-    organization: 'Bajaj Finserv',
+    period: 'February 2026 — Present',
+    role: 'Research Assistant',
+    organization: 'NYU School of Global Public Health',
     summary:
-      'Worked on Core Java to Spring Boot modernization and Partner Integration REST APIs.',
-    highlights: [
-      {
-        value: '~6 mo → ~1 mo',
-        label: 'partner onboarding improvement',
-      },
-    ],
-    tags: ['Core Java', 'Spring Boot', 'Partner Integration REST APIs'],
-  },
-  {
-    period: '2022 — 2024',
-    role: 'Software Engineer',
-    organization: 'Bajaj Finserv',
-    summary:
-      'Built a multithreaded Java scheduler handling millions of transaction documents for a Document Management System.',
+      'Healthcare AI research across clinical risk prediction, statistical modeling, and social determinants of health.',
     highlights: [],
-    tags: ['Microservices', 'Concurrency', 'DMS', 'Java'],
+    tags: [
+      'Healthcare AI',
+      'Clinical risk prediction',
+      'Statistical modeling',
+      'Social determinants of health',
+    ],
   },
   {
     period: '2024 — 2025',
@@ -50,17 +40,26 @@ export const experienceTimeline = [
     tags: ['Java', 'REST APIs', 'Rule Engines'],
   },
   {
-    period: '2026 — PRESENT',
-    role: 'Research Assistant',
-    organization: 'NYU School of Global Public Health',
+    period: '2022 — 2024',
+    role: 'Software Engineer',
+    organization: 'Bajaj Finserv',
     summary:
-      'Healthcare AI research across clinical risk prediction, statistical modeling, and social determinants of health.',
+      'Built a multithreaded Java scheduler handling millions of transaction documents for a Document Management System.',
     highlights: [],
-    tags: [
-      'Healthcare AI',
-      'Clinical risk prediction',
-      'Statistical modeling',
-      'Social determinants of health',
+    tags: ['Microservices', 'Concurrency', 'DMS', 'Java'],
+  },
+  {
+    period: '2022',
+    role: 'Software Engineering Intern',
+    organization: 'Bajaj Finserv',
+    summary:
+      'Worked on Core Java to Spring Boot modernization and Partner Integration REST APIs.',
+    highlights: [
+      {
+        value: '~6 mo → ~1 mo',
+        label: 'partner onboarding improvement',
+      },
     ],
+    tags: ['Core Java', 'Spring Boot', 'Partner Integration REST APIs'],
   },
 ]

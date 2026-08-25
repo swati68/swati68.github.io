@@ -1,8 +1,6 @@
 export const projectLibraryHeader = {
   label: '04 / PROJECTS',
-  heading: "Things I've Built",
-  intro:
-    "I've accumulated quite a few projects over the years. These are a few I'm particularly fond of.",
+  heading: 'Projects',
   outro: 'More projects live on GitHub as the broader archive.',
 }
 
@@ -28,7 +26,7 @@ export const projects = [
     ],
     featured: true,
     visual: 'pipeline',
-    githubUrl: null,
+    githubUrl: 'https://github.com/swati68/foreign-whispers-project',
     demoUrl: null,
     status: null,
     problem:
@@ -69,7 +67,7 @@ export const projects = [
     ],
     featured: true,
     visual: 'map',
-    githubUrl: null,
+    githubUrl: 'https://github.com/Yuechooo/Google-Hackathon',
     demoUrl: null,
     status: null,
     problem:
@@ -102,7 +100,7 @@ export const projects = [
     technologies: ['C++', 'OpenMP/MPI', 'MLPack'],
     featured: true,
     visual: 'tree',
-    githubUrl: null,
+    githubUrl: 'https://github.com/swati68/ParallelGenetic-HeartDisease-Model',
     demoUrl: null,
     status: null,
     problem:
@@ -135,7 +133,7 @@ export const projects = [
     technologies: ['Python', 'CNNs', 'Librosa', 'Scikit-learn'],
     featured: false,
     visual: 'waveform',
-    githubUrl: null,
+    githubUrl: 'https://github.com/swati68/UrbanSound8K-AudioClassification',
     demoUrl: null,
     status: null,
     problem:
