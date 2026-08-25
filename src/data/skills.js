@@ -1,6 +1,6 @@
 export const toolkitHeader = {
   label: '05 / TOOLKIT',
-  heading: 'things i work with.',
+  heading: 'Toolkit',
 }
 
 export const toolkitGroups = [

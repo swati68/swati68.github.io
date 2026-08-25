@@ -10,13 +10,16 @@
 
 html {
   min-width: 320px;
-  background: var(--color-background);
+  background: var(--bg);
   font-family: var(--font-sans);
   font-size: 100%;
   line-height: var(--line-height-base);
   scroll-behavior: smooth;
   scroll-padding-top: 5.5rem;
   text-rendering: optimizeLegibility;
+  transition:
+    background-color var(--transition-base),
+    color var(--transition-base);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -24,9 +27,13 @@ html {
 body {
   min-height: 100vh;
   background:
-    radial-gradient(circle at top left, rgba(103, 213, 255, 0.055), transparent 22rem),
-    var(--color-background);
-  color: var(--color-text-primary);
+    radial-gradient(circle at 12% 0%, var(--accent-primary-soft), transparent 25rem),
+    radial-gradient(circle at 88% 8%, var(--accent-secondary-soft), transparent 22rem),
+    var(--bg);
+  color: var(--text-primary);
+  transition:
+    background-color var(--transition-base),
+    color var(--transition-base);
 }
 
 button,
@@ -49,8 +56,8 @@ button {
 }
 
 a {
-  color: var(--color-accent-blue);
-  text-decoration-color: rgba(88, 166, 255, 0.45);
+  color: var(--accent-primary);
+  text-decoration-color: color-mix(in srgb, var(--accent-primary), transparent 45%);
   text-underline-offset: 0.18em;
   transition:
     color var(--transition-fast),
@@ -58,7 +65,7 @@ a {
 }
 
 a:hover {
-  color: var(--color-accent-blue-hover);
+  color: var(--accent-primary-hover);
   text-decoration-color: currentColor;
 }
 
@@ -68,8 +75,8 @@ a:hover {
 }
 
 ::selection {
-  background: rgba(88, 166, 255, 0.3);
-  color: var(--color-text-primary);
+  background: color-mix(in srgb, var(--accent-primary), transparent 70%);
+  color: var(--text-primary);
 }
 
 #root {
@@ -79,17 +86,13 @@ a:hover {
 h1,
 h2,
 h3 {
-  color: var(--color-text-primary);
-  font-weight: 700;
+  color: var(--text-primary);
+  font-weight: 720;
   line-height: var(--line-height-tight);
 }
 
-h1 {
-  font-size: var(--font-size-4xl);
-}
-
 p {
-  color: var(--color-text-secondary);
+  color: var(--text-secondary);
 }
 
 code,

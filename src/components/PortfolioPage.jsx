@@ -17,6 +17,7 @@ import { researchHeader, researchStudies } from '../data/research.js'
 import { toolkitGroups, toolkitHeader } from '../data/skills.js'
 import useActiveSection from '../hooks/useActiveSection.js'
 import useRevealOnScroll from '../hooks/useRevealOnScroll.js'
+import useTheme from '../hooks/useTheme.js'
 import styles from './PortfolioPage.module.css'
 
 const sectionIds = navItems.map((item) => item.id)
@@ -73,7 +74,33 @@ function ExternalAction({
   )
 }
 
-function Navbar({ activeId, hasScrolled }) {
+function ThemeToggle({ theme, onToggleTheme }) {
+  const nextTheme = theme === 'dark' ? 'light' : 'dark'
+  const label = `Switch to ${nextTheme} theme`
+
+  return (
+    <button
+      aria-label={label}
+      className={styles.themeToggle}
+      onClick={onToggleTheme}
+      title={label}
+      type="button"
+    >
+      {theme === 'dark' ? (
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="12" r="4.5" />
+          <path d="M12 2.5V5M12 19v2.5M4.58 4.58 6.34 6.34M17.66 17.66l1.76 1.76M2.5 12H5M19 12h2.5M4.58 19.42l1.76-1.76M17.66 6.34l1.76-1.76" />
+        </svg>
+      ) : (
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M20 14.4A7.6 7.6 0 0 1 9.6 4 8.1 8.1 0 1 0 20 14.4Z" />
+        </svg>
+      )}
+    </button>
+  )
+}
+
+function Navbar({ activeId, hasScrolled, onToggleTheme, theme }) {
   const [isOpen, setIsOpen] = useState(false)
   const desktopNavRef = useRef(null)
   const [indicatorStyle, setIndicatorStyle] = useState({
@@ -128,7 +155,7 @@ function Navbar({ activeId, hasScrolled }) {
     >
       <div className={styles.navbarInner}>
         <a className={styles.brand} href="#top" onClick={() => setIsOpen(false)}>
-          SWATI SINGH
+          S.
         </a>
 
         <nav
@@ -156,8 +183,9 @@ function Navbar({ activeId, hasScrolled }) {
         </nav>
 
         <div className={styles.navActions}>
+          <ThemeToggle theme={theme} onToggleTheme={onToggleTheme} />
           <ExternalAction className={styles.resumeNav} href={profileLinks.resume}>
-            resume
+            Resume
           </ExternalAction>
 
           <button
@@ -168,7 +196,7 @@ function Navbar({ activeId, hasScrolled }) {
             onClick={() => setIsOpen((open) => !open)}
             type="button"
           >
-            menu
+            Menu
           </button>
         </div>
       </div>
@@ -193,7 +221,7 @@ function Navbar({ activeId, hasScrolled }) {
             </a>
           ))}
           <ExternalAction className={styles.resumeNav} href={profileLinks.resume}>
-            resume
+            Resume
           </ExternalAction>
         </nav>
       ) : null}
@@ -201,10 +229,10 @@ function Navbar({ activeId, hasScrolled }) {
   )
 }
 
-function SectionHeader({ heading, label, prompt }) {
+function SectionHeader({ eyebrow, heading, label }) {
   return (
     <header className={styles.sectionHeader}>
-      {prompt ? <p className={styles.prompt}>{prompt}</p> : null}
+      {eyebrow ? <p className={styles.eyebrow}>{eyebrow}</p> : null}
       <p className={styles.sectionLabel}>{label}</p>
       <h2>{heading}</h2>
     </header>
@@ -213,26 +241,39 @@ function SectionHeader({ heading, label, prompt }) {
 
 function HeroVisual() {
   return (
-    <div className={styles.heroVisual}>
-      <svg viewBox="0 0 420 340" role="img">
-        <title>Systems AI research connection diagram</title>
-        <path className={styles.heroEdge} d="M210 64 L92 250 L328 250 Z" />
-        <g className={styles.heroNodeTop}>
-          <circle cx="210" cy="64" r="8" />
-          <text x="210" y="38">systems</text>
-          <text x="210" y="92">Java / backend / distributed systems</text>
-        </g>
-        <g className={styles.heroNodeLeft}>
-          <circle cx="92" cy="250" r="8" />
-          <text x="92" y="282">AI</text>
-          <text x="92" y="306">ML / LLMs / GPU</text>
-        </g>
-        <g className={styles.heroNodeRight}>
-          <circle cx="328" cy="250" r="8" />
-          <text x="328" y="282">research</text>
-          <text x="328" y="306">healthcare / statistical + causal methods</text>
-        </g>
-      </svg>
+    <div
+      className={styles.heroVisual}
+      role="img"
+      aria-label="Editor-style profile panel showing systems, AI and research focus areas"
+    >
+      <div className={styles.editorChrome} aria-hidden="true">
+        <span>profile.md</span>
+        <span>focus</span>
+      </div>
+
+      <div className={styles.focusRows} aria-hidden="true">
+        <div className={styles.focusRow}>
+          <span className={styles.lineNumber}>01</span>
+          <span className={styles.focusName}>Systems</span>
+          <span>Java · Backend · Distributed Systems</span>
+        </div>
+        <div className={styles.focusRow}>
+          <span className={styles.lineNumber}>02</span>
+          <span className={styles.focusName}>AI / ML</span>
+          <span>ML · LLMs · GPU Inference</span>
+        </div>
+        <div className={styles.focusRow}>
+          <span className={styles.lineNumber}>03</span>
+          <span className={styles.focusName}>Research</span>
+          <span>Healthcare · Statistical/Causal Methods</span>
+        </div>
+      </div>
+
+      <div className={styles.focusGraph} aria-hidden="true">
+        <span className={styles.graphSystems}>Systems</span>
+        <span className={styles.graphAi}>AI / ML</span>
+        <span className={styles.graphResearch}>Research</span>
+      </div>
     </div>
   )
 }
@@ -241,44 +282,43 @@ function HeroSection() {
   return (
     <section className={styles.heroSection} id="top" aria-labelledby="hero-title">
       <div className={styles.heroCopy}>
-        <p className={`${styles.prompt} ${styles.heroStaggerOne}`}>{hero.prompt}</p>
-        <p className={`${styles.heroGreeting} ${styles.heroStaggerTwo}`}>
-          {hero.greeting}
+        <p className={`${styles.eyebrow} ${styles.heroStaggerOne}`}>
+          {hero.eyebrow}
         </p>
-        <h1 id="hero-title" className={styles.heroStaggerThree}>
-          {hero.name}
+        <h1 id="hero-title" className={styles.heroStaggerTwo}>
+          {hero.title}
         </h1>
-        <p className={`${styles.heroStatement} ${styles.heroStaggerFour}`}>
+        <p className={`${styles.heroStatement} ${styles.heroStaggerThree}`}>
           {hero.statement}
         </p>
-        <p className={`${styles.heroDescription} ${styles.heroStaggerFive}`}>
+        <p className={`${styles.heroDescription} ${styles.heroStaggerFour}`}>
           {hero.description}
         </p>
 
-        <p className={`${styles.heroStatus} ${styles.heroStaggerSix}`}>
+        <p className={`${styles.heroStatus} ${styles.heroStaggerFive}`}>
           <StatusDot />
           {hero.status}
         </p>
 
-        <p className={`${styles.heroFocus} ${styles.heroStaggerSeven}`}>
+        <p className={`${styles.heroFocus} ${styles.heroStaggerSix}`}>
           {hero.focus.join(' · ')}
         </p>
 
-        <div className={`${styles.heroActions} ${styles.heroStaggerEight}`}>
+        <div className={`${styles.heroActions} ${styles.heroStaggerSeven}`}>
           <a className={styles.primaryButton} href="#projects">
-            <span>view my work</span>
+            <span>View Projects</span>
             <span aria-hidden="true">↓</span>
           </a>
           <ExternalAction
             className={styles.secondaryButton}
             href={profileLinks.resume}
           >
-            resume
+            Resume
           </ExternalAction>
         </div>
 
         <nav
-          className={`${styles.profileLinks} ${styles.heroStaggerNine}`}
+          className={`${styles.profileLinks} ${styles.heroStaggerEight}`}
           aria-label="Profile links"
         >
           <ExternalAction href={profileLinks.github}>GitHub</ExternalAction>
@@ -293,7 +333,7 @@ function HeroSection() {
         </nav>
       </div>
 
-      <div className={styles.heroStaggerTen}>
+      <div className={styles.heroStaggerNine}>
         <HeroVisual />
       </div>
     </section>
@@ -391,13 +431,17 @@ function ExperienceSection() {
 function ResearchSection() {
   return (
     <section className={styles.section} data-reveal id="research">
-      <SectionHeader heading={researchHeader.heading} label={researchHeader.label} />
+      <SectionHeader
+        eyebrow={researchHeader.file}
+        heading={researchHeader.heading}
+        label={researchHeader.label}
+      />
       <p className={styles.sectionIntroSingle}>{researchHeader.intro}</p>
 
       <div className={styles.researchGrid}>
         {researchStudies.map((study) => (
           <article className={styles.researchCard} key={study.id}>
-            <p className={styles.researchNumber}>{study.number}</p>
+            <p className={styles.researchNumber}>[{study.number}]</p>
             <h3>{study.title}</h3>
 
             <dl className={styles.researchDetails}>
@@ -526,9 +570,12 @@ function ProjectCard({ project }) {
 
   return (
     <article className={styles.projectCard}>
-      <ProjectVisual type={project.visual} />
-      <p className={styles.projectNumber}>{project.number}</p>
+      <div className={styles.projectMeta}>
+        <p className={styles.projectNumber}>{project.number}</p>
+        <p className={styles.projectDomain}>{project.domain}</p>
+      </div>
       <h3>{project.name}</h3>
+      <ProjectVisual type={project.visual} />
       <p>{project.longDescription}</p>
       <ul className={styles.techStack}>
         {project.technologies.map((technology) => (
@@ -569,9 +616,8 @@ function ProjectsSection() {
       </div>
 
       <p className={styles.githubRest}>
-        <span aria-hidden="true">&gt;</span>
         {projectLibraryHeader.outro}{' '}
-        <ExternalAction href={profileLinks.github}>find the rest on GitHub</ExternalAction>
+        <ExternalAction href={profileLinks.github}>View GitHub</ExternalAction>
       </p>
     </section>
   )
@@ -601,7 +647,7 @@ function ToolkitSection() {
 function OutsideEditorSection() {
   return (
     <section className={styles.outsideSection} data-reveal>
-      <p className={styles.prompt}>{outsideEditor.prompt}</p>
+      <p className={styles.eyebrow}>{outsideEditor.label}</p>
       <h2>{outsideEditor.heading}</h2>
       <ul>
         {outsideEditor.lines.map((line) => (
@@ -638,9 +684,9 @@ function ContactSection() {
   return (
     <section className={styles.section} data-reveal id="contact">
       <SectionHeader
+        eyebrow={contact.eyebrow}
         heading={contact.heading}
         label={contact.label}
-        prompt={contact.prompt}
       />
 
       <div className={styles.contactBlock}>
@@ -709,14 +755,13 @@ function Footer() {
           </ExternalAction>
         ))}
       </nav>
-
-      <span aria-hidden="true">{footer.end}</span>
     </footer>
   )
 }
 
 function PortfolioPage() {
   const { activeId, hasScrolled } = useActiveSection(sectionIds)
+  const { theme, toggleTheme } = useTheme()
   useRevealOnScroll()
 
   return (
@@ -724,7 +769,12 @@ function PortfolioPage() {
       <a className={styles.skipLink} href="#main-content">
         Skip to main content
       </a>
-      <Navbar activeId={activeId} hasScrolled={hasScrolled} />
+      <Navbar
+        activeId={activeId}
+        hasScrolled={hasScrolled}
+        onToggleTheme={toggleTheme}
+        theme={theme}
+      />
 
       <main id="main-content">
         <HeroSection />

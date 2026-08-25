@@ -1,28 +1,50 @@
-:root {
-  color-scheme: dark;
+:root,
+html[data-theme='light'] {
+  color-scheme: light;
 
-  --color-background: #0b0d10;
-  --color-surface: #101318;
-  --color-surface-elevated: #13171d;
-  --color-code-background: #080a0d;
-  --color-border: rgba(255, 255, 255, 0.08);
-  --color-border-subtle: rgba(255, 255, 255, 0.055);
-  --color-border-strong: rgba(255, 255, 255, 0.16);
+  --bg: #f5f3ee;
+  --bg-muted: #eceae5;
+  --surface: #faf9f6;
+  --surface-secondary: #eeece7;
+  --surface-elevated: #fffdf8;
+  --editor-surface: #f1efea;
+  --editor-gutter: #e6e3dc;
+  --text-primary: #25262b;
+  --text-secondary: #5f6268;
+  --text-muted: #7c7f86;
+  --text-inverse: #f8f7f3;
+  --border: #d8d6d0;
+  --border-subtle: rgba(37, 38, 43, 0.08);
+  --border-strong: rgba(37, 38, 43, 0.18);
 
-  --color-text-primary: #e6edf3;
-  --color-text-secondary: #b7c0cc;
-  --color-text-muted: #8b949e;
-  --color-text-inverse: #0b0d10;
+  --accent-primary: #52658f;
+  --accent-primary-hover: #384b76;
+  --accent-secondary: #7a6494;
+  --accent-success: #5f7f67;
+  --accent-warning: #a66b3f;
+  --accent-rust: #a45d48;
+  --accent-teal: #4f7f7a;
+  --accent-blue-gray: #60798a;
 
-  --color-accent-blue: #67d5ff;
-  --color-accent-blue-hover: #9be5ff;
-  --color-accent-purple: #a78bfa;
-  --color-accent-orange: #f6a85f;
-  --color-accent-green: #6ee7a8;
+  --code-keyword: #7a6494;
+  --code-string: #5f7f67;
+  --code-function: #52658f;
+  --code-property: #a66b3f;
+
+  --accent-primary-soft: rgba(82, 101, 143, 0.12);
+  --accent-secondary-soft: rgba(122, 100, 148, 0.12);
+  --accent-success-soft: rgba(95, 127, 103, 0.13);
+  --accent-warning-soft: rgba(166, 107, 63, 0.13);
+  --grid-line: rgba(37, 38, 43, 0.055);
+  --nav-bg: rgba(245, 243, 238, 0.76);
+  --nav-bg-scrolled: rgba(250, 249, 246, 0.9);
+  --shadow-soft: 0 1rem 2.5rem rgba(71, 67, 59, 0.13);
+  --shadow-elevated: 0 1.6rem 4rem rgba(71, 67, 59, 0.18);
+  --focus-ring: 0 0 0 0.2rem rgba(82, 101, 143, 0.28);
 
   --font-sans:
-    Inter, Geist, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
-    "Segoe UI", sans-serif;
+    Inter, Geist, Manrope, ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-mono:
     "JetBrains Mono", "SFMono-Regular", Consolas, "Liberation Mono", Menlo,
     monospace;
@@ -34,10 +56,10 @@
   --font-size-xl: 1.25rem;
   --font-size-2xl: 1.5rem;
   --font-size-3xl: 2rem;
-  --font-size-4xl: 2.5rem;
+  --font-size-4xl: 2.75rem;
 
   --line-height-tight: 1.15;
-  --line-height-base: 1.6;
+  --line-height-base: 1.62;
 
   --space-1: 0.25rem;
   --space-2: 0.5rem;
@@ -48,6 +70,7 @@
   --space-8: 2rem;
   --space-10: 2.5rem;
   --space-12: 3rem;
+  --space-14: 3.5rem;
   --space-16: 4rem;
   --space-20: 5rem;
 
@@ -61,10 +84,6 @@
   --width-content: 56rem;
   --width-page: 72rem;
   --width-wide: 74rem;
-  --width-sidebar: 17.5rem;
-
-  --height-titlebar: 2.5rem;
-  --height-statusbar: 1.375rem;
 
   --breakpoint-sm: 40rem;
   --breakpoint-md: 48rem;
@@ -74,10 +93,69 @@
   --transition-fast: 160ms ease;
   --transition-base: 220ms ease;
 
-  --shadow-card: 0 1rem 2.5rem rgba(0, 0, 0, 0.22);
-  --shadow-elevated: 0 1.5rem 4rem rgba(0, 0, 0, 0.34);
-  --focus-ring: 0 0 0 0.2rem rgba(88, 166, 255, 0.35);
-
   --z-drawer-backdrop: 20;
   --z-drawer: 30;
+
+  /* Compatibility aliases while the component CSS stays semantic. */
+  --color-background: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-elevated: var(--surface-elevated);
+  --color-code-background: var(--editor-surface);
+  --color-border: var(--border);
+  --color-border-subtle: var(--border-subtle);
+  --color-border-strong: var(--border-strong);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  --color-text-inverse: var(--text-inverse);
+  --color-accent-blue: var(--accent-primary);
+  --color-accent-blue-hover: var(--accent-primary-hover);
+  --color-accent-purple: var(--accent-secondary);
+  --color-accent-orange: var(--accent-warning);
+  --color-accent-green: var(--accent-success);
+  --shadow-card: var(--shadow-soft);
+}
+
+html[data-theme='dark'] {
+  color-scheme: dark;
+
+  --bg: #181a1f;
+  --bg-muted: #1c1f25;
+  --surface: #1f2229;
+  --surface-secondary: #252932;
+  --surface-elevated: #292e38;
+  --editor-surface: #20242c;
+  --editor-gutter: #1a1d23;
+  --text-primary: #e6e8eb;
+  --text-secondary: #b7bcc4;
+  --text-muted: #9aa0a8;
+  --text-inverse: #181a1f;
+  --border: #343943;
+  --border-subtle: rgba(230, 232, 235, 0.075);
+  --border-strong: rgba(230, 232, 235, 0.18);
+
+  --accent-primary: #8ca4d4;
+  --accent-primary-hover: #aec0e4;
+  --accent-secondary: #b09ad1;
+  --accent-success: #8eb79b;
+  --accent-warning: #d29a68;
+  --accent-rust: #ce846f;
+  --accent-teal: #86b8b2;
+  --accent-blue-gray: #8aa8ba;
+
+  --code-keyword: #b09ad1;
+  --code-string: #8eb79b;
+  --code-function: #8ca4d4;
+  --code-property: #d29a68;
+
+  --accent-primary-soft: rgba(140, 164, 212, 0.13);
+  --accent-secondary-soft: rgba(176, 154, 209, 0.13);
+  --accent-success-soft: rgba(142, 183, 155, 0.12);
+  --accent-warning-soft: rgba(210, 154, 104, 0.12);
+  --grid-line: rgba(230, 232, 235, 0.045);
+  --nav-bg: rgba(24, 26, 31, 0.72);
+  --nav-bg-scrolled: rgba(31, 34, 41, 0.9);
+  --shadow-soft: 0 1rem 2.5rem rgba(0, 0, 0, 0.24);
+  --shadow-elevated: 0 1.6rem 4rem rgba(0, 0, 0, 0.34);
+  --focus-ring: 0 0 0 0.2rem rgba(140, 164, 212, 0.34);
 }

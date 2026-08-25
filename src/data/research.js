@@ -1,6 +1,7 @@
 export const researchHeader = {
   label: '03 / RESEARCH',
-  heading: "questions i'm exploring.",
+  heading: 'Research',
+  file: 'research.ipynb',
   intro:
     "Grad school pulled me into research, particularly questions around healthcare, neighborhoods, and what machine learning can and can't tell us.",
 }

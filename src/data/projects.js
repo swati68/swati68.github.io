@@ -1,16 +1,16 @@
 export const projectLibraryHeader = {
   label: '04 / PROJECTS',
-  heading: "things i've built.",
+  heading: "Things I've Built",
   intro:
     "I've accumulated quite a few projects over the years. These are a few I'm particularly fond of.",
-  outro: "I've built quite a few other things over the years.",
+  outro: 'More projects live on GitHub as the broader archive.',
 }
 
 export const projects = [
   {
     id: 'foreign-whispers',
     slug: 'foreign-whispers',
-    number: 'PROJECT 01',
+    number: 'Project 01',
     name: 'Foreign Whispers',
     year: null,
     shortDescription: 'AI video dubbing platform handling multilingual media workflows.',
@@ -50,7 +50,7 @@ export const projects = [
   {
     id: 'cinemamatch-nyc',
     slug: 'cinemamatch-nyc',
-    number: 'PROJECT 02',
+    number: 'Project 02',
     name: 'CinemaMatch NYC',
     year: null,
     shortDescription:
@@ -90,7 +90,7 @@ export const projects = [
   {
     id: 'heart-disease-hybrid-model',
     slug: 'heart-disease-hybrid-model',
-    number: 'PROJECT 03',
+    number: 'Project 03',
     name: 'Heart Disease Prediction',
     year: null,
     shortDescription:
@@ -123,7 +123,7 @@ export const projects = [
   {
     id: 'urban-sound-classification',
     slug: 'urban-sound-classification',
-    number: 'PROJECT 04',
+    number: 'Project 04',
     name: 'Urban Sound Classification',
     year: null,
     shortDescription:
