@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Swati Singh portfolio preview</title>
+  <desc id="desc">Dark developer-console inspired preview card for Swati Singh, Software Engineer and AI/ML portfolio.</desc>
+  <defs>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M32 0H0V32" fill="none" stroke="rgba(255,255,255,0.045)" stroke-width="1"/>
+    </pattern>
+    <linearGradient id="edge" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#67d5ff" stop-opacity="0.62"/>
+      <stop offset="1" stop-color="#a78bfa" stop-opacity="0.56"/>
+    </linearGradient>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="20" stdDeviation="24" flood-color="#000000" flood-opacity="0.38"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="630" fill="#0b0d10"/>
+  <rect width="1200" height="630" fill="url(#grid)" opacity="0.9"/>
+  <circle cx="112" cy="88" r="210" fill="#67d5ff" opacity="0.06"/>
+  <circle cx="1040" cy="536" r="250" fill="#a78bfa" opacity="0.08"/>
+
+  <rect x="72" y="64" width="1056" height="502" rx="22" fill="#101318" stroke="rgba(255,255,255,0.12)" filter="url(#softShadow)"/>
+  <rect x="96" y="88" width="1008" height="454" rx="14" fill="#0b0d10" stroke="rgba(255,255,255,0.08)"/>
+
+  <text x="128" y="145" fill="#67d5ff" font-family="SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace" font-size="24" font-weight="700">&gt; whoami</text>
+
+  <text x="128" y="238" fill="#e6edf3" font-family="Inter, Geist, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="82" font-weight="760">Swati Singh</text>
+  <text x="132" y="304" fill="#b7c0cc" font-family="Inter, Geist, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="34" font-weight="650">Software Engineer &amp; AI/ML</text>
+  <text x="132" y="362" fill="#8b949e" font-family="Inter, Geist, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="26">Backend systems · Healthcare AI research · NYU CS</text>
+
+  <g transform="translate(132 424)">
+    <circle cx="13" cy="13" r="7" fill="#6ee7a8"/>
+    <rect x="0" y="0" width="424" height="52" rx="26" fill="rgba(110,231,168,0.08)" stroke="rgba(110,231,168,0.28)"/>
+    <circle cx="25" cy="26" r="7" fill="#6ee7a8"/>
+    <text x="48" y="34" fill="#e6edf3" font-family="SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace" font-size="20" font-weight="800">OPEN TO SPRING 2027</text>
+  </g>
+
+  <g transform="translate(746 176)">
+    <path d="M150 0L18 210H282Z" fill="none" stroke="url(#edge)" stroke-width="3"/>
+    <circle cx="150" cy="0" r="10" fill="#0b0d10" stroke="#67d5ff" stroke-width="4"/>
+    <circle cx="18" cy="210" r="10" fill="#0b0d10" stroke="#67d5ff" stroke-width="4"/>
+    <circle cx="282" cy="210" r="10" fill="#0b0d10" stroke="#a78bfa" stroke-width="4"/>
+    <text x="150" y="-32" fill="#e6edf3" text-anchor="middle" font-family="SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace" font-size="20" font-weight="800">SYSTEMS</text>
+    <text x="18" y="256" fill="#e6edf3" text-anchor="middle" font-family="SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace" font-size="20" font-weight="800">AI</text>
+    <text x="282" y="256" fill="#e6edf3" text-anchor="middle" font-family="SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace" font-size="20" font-weight="800">RESEARCH</text>
+  </g>
+</svg>
