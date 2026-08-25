@@ -77,21 +77,18 @@ export const about = {
     'After three years at Bajaj Finserv, I moved to New York for graduate school at NYU. My work now sits across software systems, machine learning, and healthcare research, with a focus on building things that are technically solid and genuinely useful.',
   ],
   focusCards: [
-    {
-      title: 'Software Engineering',
-      detail: 'Backend systems, REST APIs, microservices, and production reliability.',
-      meta: 'Java · Systems · APIs',
-    },
-    {
-      title: 'AI / ML',
-      detail: 'Model pipelines, NLP workflows, LLM APIs, and GPU-backed inference.',
-      meta: 'ML · NLP · Inference',
-    },
-    {
-      title: 'Research Engineering',
-      detail: 'Healthcare AI, clinical data, social determinants of health, and evaluation.',
-      meta: 'Healthcare · SDoH · Evaluation',
-    },
+  {
+    title: 'Software Engineering',
+    detail: 'Backend systems, REST APIs, microservices, and production reliability.',
+  },
+  {
+    title: 'AI / ML',
+    detail: 'Model pipelines, NLP workflows, LLM APIs, and GPU-backed inference.',
+  },
+  {
+    title: 'Research Engineering',
+    detail: 'Healthcare AI, clinical data, social determinants of health, and evaluation.',
+  },
   ],
   metadata: [
     { label: 'LOCATION', value: 'New York' },

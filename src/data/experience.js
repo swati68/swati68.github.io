@@ -8,7 +8,7 @@ export const experienceSection = {
 
 export const experienceTimeline = [
   {
-    period: 'February 2026 — Present',
+    period: '2026 — Present',
     role: 'Research Assistant',
     organization: 'NYU School of Global Public Health',
     summary:

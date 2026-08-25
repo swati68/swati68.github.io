@@ -10,6 +10,7 @@ export const researchStudies = [
   {
     id: 'clinical-risk-sdoh',
     number: '01',
+    status: 'Under Review',
     title: 'Clinical Risk Prediction + Social Determinants of Health',
     question:
       'How does neighborhood context affect prediction of healthcare utilization?',
@@ -25,6 +26,7 @@ export const researchStudies = [
   {
     id: 'neighborhood-cvd',
     number: '02',
+    status: 'Under Review',
     title: 'Neighborhood Environment + Cardiovascular Disease',
     question:
       'How do neighborhood factors influence cardiovascular disease, and how might individual socioeconomic and behavioral factors mediate that relationship?',
@@ -34,6 +36,7 @@ export const researchStudies = [
   {
     id: 'clinical-risk-sdoh-additional',
     number: '03',
+    status: 'In Progress',
     title: 'Clinical Risk Prediction + Social Determinants of Health',
     question:
       'How does neighborhood context affect prediction of healthcare utilization?',

@@ -94,7 +94,6 @@ function ExternalAction({
   download = false,
   href,
   iconName,
-  trailingIcon = '↗',
 }) {
   const opensNewTab =
     Boolean(href) &&
@@ -115,11 +114,6 @@ function ExternalAction({
         <ActionIcon name={iconName} />
         <span>{children}</span>
       </span>
-      {trailingIcon ? (
-        <span className={styles.actionArrow} aria-hidden="true">
-          {trailingIcon}
-        </span>
-      ) : null}
     </>
   )
 
@@ -329,31 +323,21 @@ function HeroVisual() {
         </div>
       </div>
 
-      <svg
-        className={styles.focusGraph}
-        viewBox="0 0 360 176"
-        aria-hidden="true"
-      >
-        <path className={styles.graphEdge} d="M180 42 74 132H286Z" />
-        <g className={`${styles.graphNode} ${styles.graphSystems}`}>
-          <circle cx="180" cy="42" r="7" />
-          <text x="180" y="23" textAnchor="middle">
-            Systems
-          </text>
-        </g>
-        <g className={`${styles.graphNode} ${styles.graphAi}`}>
-          <circle cx="74" cy="132" r="7" />
-          <text x="74" y="157" textAnchor="middle">
-            AI / ML
-          </text>
-        </g>
-        <g className={`${styles.graphNode} ${styles.graphResearch}`}>
-          <circle cx="286" cy="132" r="7" />
-          <text x="286" y="157" textAnchor="middle">
-            Research
-          </text>
-        </g>
-      </svg>
+      <div className={styles.focusGraph} aria-hidden="true">
+        <svg className={styles.graphLines} viewBox="0 0 360 176">
+          <path d="M180 48 76 124H284Z" />
+        </svg>
+        <span className={`${styles.graphPoint} ${styles.graphPointSystems}`} />
+        <span className={`${styles.graphPoint} ${styles.graphPointAi}`} />
+        <span className={`${styles.graphPoint} ${styles.graphPointResearch}`} />
+        <span className={`${styles.graphLabel} ${styles.graphSystems}`}>
+          Systems
+        </span>
+        <span className={`${styles.graphLabel} ${styles.graphAi}`}>AI / ML</span>
+        <span className={`${styles.graphLabel} ${styles.graphResearch}`}>
+          Research
+        </span>
+      </div>
     </div>
   )
 }
@@ -388,7 +372,6 @@ function HeroSection() {
               href={action.href}
               iconName={action.icon}
               key={action.id}
-              trailingIcon={action.id === 'projects' ? '↓' : '↗'}
             >
               {action.label}
             </ExternalAction>
@@ -419,7 +402,6 @@ function AboutSection() {
           <div className={styles.aboutFocusGrid}>
             {about.focusCards.map((card) => (
               <article className={styles.focusCard} key={card.title}>
-                <p>{card.meta}</p>
                 <h3>{card.title}</h3>
                 <span>{card.detail}</span>
               </article>
@@ -496,7 +478,10 @@ function ResearchSection() {
       <div className={styles.researchGrid}>
         {researchStudies.map((study) => (
           <article className={styles.researchCard} key={study.id}>
-            <p className={styles.researchNumber}>[{study.number}]</p>
+            <div className={styles.researchMeta}>
+              <p className={styles.researchNumber}>[{study.number}]</p>
+              <p className={styles.researchStatus}>{study.status}</p>
+            </div>
             <h3>{study.title}</h3>
 
             <dl className={styles.researchDetails}>
@@ -703,9 +688,9 @@ function OutsideEditorSection() {
       <p className={styles.eyebrow}>{outsideEditor.label}</p>
       <h2>{outsideEditor.heading}</h2>
       <ul>
-        {outsideEditor.lines.map((line) => (
+        {outsideEditor.lines.map((line, index) => (
           <li key={line}>
-            <span aria-hidden="true">·</span>
+            <span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
             {line}
           </li>
         ))}
@@ -760,7 +745,6 @@ function ContactSection() {
                 href={action.href}
                 iconName={action.id}
                 key={action.id}
-                trailingIcon={action.id === 'email' ? '' : '↗'}
               >
                 {action.label}
               </ExternalAction>
@@ -775,6 +759,7 @@ function ContactSection() {
               id="contact-name"
               name="name"
               onChange={handleFieldChange}
+              placeholder="Your name"
               required
               type="text"
               value={formData.name}
@@ -786,6 +771,7 @@ function ContactSection() {
               id="contact-email"
               name="email"
               onChange={handleFieldChange}
+              placeholder="you@example.com"
               required
               type="email"
               value={formData.email}
@@ -797,6 +783,7 @@ function ContactSection() {
               id="contact-message"
               name="message"
               onChange={handleFieldChange}
+              placeholder="What would you like to talk about?"
               required
               rows="5"
               value={formData.message}

@@ -370,16 +370,6 @@
     transform var(--transition-fast);
 }
 
-.actionArrow {
-  transition: transform var(--transition-fast);
-}
-
-.primaryButton:hover .actionArrow,
-.secondaryButton:hover .actionArrow,
-.actionLink:hover .actionArrow {
-  transform: translate(2px, -2px);
-}
-
 .primaryButton:hover .actionIcon,
 .secondaryButton:hover .actionIcon,
 .actionLink:hover .actionIcon {
@@ -467,18 +457,27 @@
 }
 
 .focusGraph {
+  position: relative;
   width: 100%;
+  height: 10rem;
   min-height: 10rem;
   margin-top: var(--space-2);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
   background: color-mix(in srgb, var(--surface), transparent 24%);
-  overflow: visible;
+  overflow: hidden;
 }
 
-.graphEdge {
+.graphLines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.graphLines path {
   fill: none;
-  stroke: color-mix(in srgb, var(--accent-primary), transparent 46%);
+  stroke: color-mix(in srgb, var(--accent-primary), transparent 44%);
   stroke-dasharray: 520;
   stroke-dashoffset: 520;
   stroke-linejoin: round;
@@ -486,35 +485,69 @@
   animation: drawLine 620ms 760ms var(--motion-ease) forwards;
 }
 
-.graphNode {
+.graphPoint {
+  position: absolute;
+  z-index: 1;
+  width: 0.72rem;
+  height: 0.72rem;
+  border: 2px solid currentColor;
+  border-radius: var(--radius-pill);
+  background: var(--editor-surface);
   opacity: 0;
-  animation: nodeIn 360ms var(--motion-ease) forwards;
+  transform: translate(-50%, -50%) scale(0.92);
+  animation: graphPointIn 360ms var(--motion-ease) forwards;
 }
 
-.graphNode circle {
-  fill: var(--editor-surface);
-  stroke: currentColor;
-  stroke-width: 2;
-}
-
-.graphNode text {
-  fill: currentColor;
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  font-weight: 850;
-}
-
-.graphSystems {
+.graphPointSystems {
+  top: 27.25%;
+  left: 50%;
   color: var(--accent-primary);
   animation-delay: 860ms;
 }
 
+.graphPointAi {
+  top: 70.45%;
+  left: 21.1%;
+  color: var(--accent-secondary);
+  animation-delay: 960ms;
+}
+
+.graphPointResearch {
+  top: 70.45%;
+  left: 78.9%;
+  color: var(--accent-success);
+  animation-delay: 1060ms;
+}
+
+.graphLabel {
+  position: absolute;
+  z-index: 2;
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  font-weight: 850;
+  opacity: 0;
+  animation: fadeIn 360ms var(--motion-ease) forwards;
+}
+
+.graphSystems {
+  top: 0.95rem;
+  left: 50%;
+  color: var(--accent-primary);
+  transform: translateX(-50%);
+  animation-delay: 860ms;
+}
+
 .graphAi {
+  bottom: 1.2rem;
+  left: 9%;
   color: var(--accent-secondary);
   animation-delay: 960ms;
 }
 
 .graphResearch {
+  right: 9%;
+  bottom: 1.2rem;
   color: var(--accent-success);
   animation-delay: 1060ms;
 }
@@ -626,14 +659,6 @@
   border-color: var(--border-strong);
   background: var(--surface-elevated);
   transform: translateY(-2px);
-}
-
-.focusCard p {
-  color: var(--text-muted);
-  font-family: var(--font-mono);
-  font-size: var(--font-size-xs);
-  font-weight: 760;
-  line-height: 1.5;
 }
 
 .focusCard h3 {
@@ -871,6 +896,33 @@
   font-weight: 850;
 }
 
+.researchMeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.researchStatus {
+  padding: 0.2rem var(--space-2);
+  border: 1px solid color-mix(in srgb, var(--accent-secondary), transparent 68%);
+  border-radius: var(--radius-pill);
+  background: var(--accent-secondary-soft);
+  color: var(--accent-secondary);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  font-weight: 850;
+  line-height: 1.4;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.researchCard:nth-child(3) .researchStatus {
+  border-color: color-mix(in srgb, var(--accent-warning), transparent 64%);
+  background: var(--accent-warning-soft);
+  color: var(--accent-warning);
+}
+
 .researchCard h3 {
   font-size: var(--font-size-xl);
 }
@@ -905,6 +957,7 @@
   display: grid;
   align-content: start;
   gap: var(--space-4);
+  height: 100%;
   min-height: 100%;
   padding: var(--space-5);
   border: 1px solid var(--border);
@@ -976,6 +1029,12 @@
 
 .projectCard h3 {
   font-size: var(--font-size-xl);
+}
+
+.projectLinks {
+  justify-content: flex-end;
+  align-self: end;
+  margin-top: auto;
 }
 
 .pipelineVisual,
@@ -1191,10 +1250,6 @@
   height: calc(var(--bar-height) + 8%);
 }
 
-.techStack {
-  margin-top: auto;
-}
-
 .githubRest {
   display: flex;
   flex-wrap: wrap;
@@ -1322,39 +1377,39 @@
 }
 
 .outsideSection {
-  max-width: var(--width-readable);
+  max-width: var(--width-content);
   gap: var(--space-4);
 }
 
 .outsideSection ul {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2);
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0;
   padding: 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
   list-style: none;
 }
 
 .outsideSection li {
-  min-height: 2.35rem;
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-3);
-  padding: 0 var(--space-3);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  background: var(--surface);
+  display: grid;
+  gap: var(--space-2);
+  padding: var(--space-4);
+  border-right: 1px solid var(--border-subtle);
   color: var(--text-secondary);
   font-size: var(--font-size-md);
   transition:
-    border-color var(--transition-fast),
     background-color var(--transition-fast),
     color var(--transition-fast),
     transform var(--transition-fast);
 }
 
+.outsideSection li:last-child {
+  border-right: 0;
+}
+
 .outsideSection li:hover {
-  border-color: var(--border-strong);
-  background: var(--surface-elevated);
+  background: color-mix(in srgb, var(--accent-rust), transparent 92%);
   color: var(--text-primary);
   transform: translateY(-1px);
 }
@@ -1362,32 +1417,44 @@
 .outsideSection li span {
   color: var(--accent-rust);
   font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  font-weight: 850;
 }
 
 .contactGrid {
   display: grid;
-  grid-template-columns: minmax(0, 0.9fr) minmax(20rem, 1fr);
-  gap: var(--space-8);
-  align-items: start;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-5);
+  align-items: stretch;
 }
 
 .contactBlock {
+  max-width: none;
+  align-content: start;
   font-size: var(--font-size-lg);
+  padding: var(--space-5);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  box-shadow: var(--shadow-soft);
 }
 
 .contactActions {
+  display: grid;
+  gap: var(--space-3);
   margin-top: var(--space-2);
 }
 
 .contactButton {
-  min-width: 10rem;
-  min-height: 3rem;
-  justify-content: space-between;
-  padding: 0 var(--space-4);
+  width: 100%;
+  min-height: 4.25rem;
+  justify-content: flex-start;
+  padding: 0 var(--space-5);
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
   background: var(--surface);
   color: var(--text-primary);
+  font-size: var(--font-size-md);
 }
 
 .contactButton:hover {
@@ -1395,14 +1462,39 @@
   background: var(--surface-elevated);
 }
 
+.contactButton .actionText {
+  gap: var(--space-3);
+}
+
+.contactButton .actionIcon {
+  width: 1.18rem;
+  height: 1.18rem;
+}
+
 .contactForm {
+  position: relative;
   display: grid;
   gap: var(--space-4);
-  padding: var(--space-5);
+  min-height: 100%;
+  padding: var(--space-6);
+  padding-left: calc(var(--space-6) + 0.75rem);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
-  background: var(--editor-surface);
+  background:
+    linear-gradient(90deg, var(--editor-gutter) 0 1.5rem, transparent 1.5rem),
+    var(--editor-surface);
   box-shadow: var(--shadow-soft);
+  overflow: hidden;
+}
+
+.contactForm::before {
+  content: '';
+  position: absolute;
+  top: var(--space-6);
+  bottom: var(--space-6);
+  left: 1.5rem;
+  width: 1px;
+  background: color-mix(in srgb, var(--accent-primary), transparent 52%);
 }
 
 .contactForm div {
@@ -1429,10 +1521,25 @@
   transition:
     border-color var(--transition-fast),
     background-color var(--transition-fast),
-    box-shadow var(--transition-fast);
+  box-shadow var(--transition-fast);
+}
+
+.contactForm input::placeholder,
+.contactForm textarea::placeholder {
+  color: color-mix(in srgb, var(--text-muted), transparent 18%);
+}
+
+.contactForm input:hover,
+.contactForm textarea:hover {
+  border-color: var(--border-strong);
+}
+
+.contactForm input {
+  min-height: 3.1rem;
 }
 
 .contactForm textarea {
+  min-height: 9rem;
   resize: vertical;
 }
 
@@ -1546,6 +1653,24 @@
   to {
     opacity: 1;
     transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes graphPointIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.92);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
   }
 }
 
@@ -1691,7 +1816,7 @@
   }
 
   .contactGrid {
-    grid-template-columns: minmax(0, 0.9fr) minmax(20rem, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .researchCard,
@@ -1758,6 +1883,10 @@
 
   .aboutFocusGrid {
     grid-template-columns: 1fr;
+  }
+
+  .outsideSection ul {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .timeline::before {
@@ -1887,6 +2016,10 @@
   .outsideSection li {
     align-items: flex-start;
   }
+
+  .outsideSection ul {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (hover: none) {
@@ -1913,8 +2046,9 @@
   .heroStaggerSeven,
   .heroStaggerEight,
   .heroStaggerNine,
-  .graphEdge,
-  .graphNode {
+  .graphLines path,
+  .graphPoint,
+  .graphLabel {
     animation: none;
     opacity: 1;
   }
@@ -1927,7 +2061,7 @@
     stroke-dashoffset: 0;
   }
 
-  .graphEdge {
+  .graphLines path {
     stroke-dashoffset: 0;
   }
 
