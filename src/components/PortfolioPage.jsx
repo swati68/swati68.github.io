@@ -366,8 +366,10 @@ function HeroSection() {
         </p>
 
         <p className={`${styles.heroStatus} ${styles.heroStaggerFour}`}>
-          <StatusDot />
-          {hero.status}
+          <span className={styles.statusMessage}>
+            <StatusDot />
+            <span>{hero.status}</span>
+          </span>
         </p>
 
         <div className={`${styles.heroActions} ${styles.heroStaggerFive}`}>
@@ -494,7 +496,7 @@ function ResearchSection() {
             <h3>{study.title}</h3>
 
             <dl className={styles.researchDetails}>
-              <div>
+              <div className={styles.researchQuestion}>
                 <dt>Question</dt>
                 <dd>{study.question}</dd>
               </div>
@@ -522,7 +524,7 @@ function ResearchSection() {
               </div>
               {study.outcomes ? (
                 <div>
-                  <dt>Outcomes</dt>
+                  <dt>Outcome</dt>
                   <dd>{study.outcomes.join(' + ')}</dd>
                 </div>
               ) : null}

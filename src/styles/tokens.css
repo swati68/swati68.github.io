@@ -10,26 +10,26 @@ html[data-theme='light'] {
   --editor-surface: #f1efea;
   --editor-gutter: #e6e3dc;
   --text-primary: #25262b;
-  --text-secondary: #5f6268;
+  --text-secondary: #555960;
   --text-muted: #7c7f86;
   --text-inverse: #f8f7f3;
   --border: #d8d6d0;
   --border-subtle: rgba(37, 38, 43, 0.08);
   --border-strong: rgba(37, 38, 43, 0.18);
 
-  --accent-primary: #52658f;
-  --accent-primary-hover: #384b76;
-  --accent-secondary: #7a6494;
-  --accent-success: #5f7f67;
-  --accent-warning: #a66b3f;
-  --accent-rust: #a45d48;
-  --accent-teal: #4f7f7a;
-  --accent-blue-gray: #60798a;
+  --accent-primary: #49649b;
+  --accent-primary-hover: #344d82;
+  --accent-secondary: #8059a0;
+  --accent-success: #4f8561;
+  --accent-warning: #b36a35;
+  --accent-rust: #b05540;
+  --accent-teal: #41877f;
+  --accent-blue-gray: #557f98;
 
-  --code-keyword: #7a6494;
-  --code-string: #5f7f67;
-  --code-function: #52658f;
-  --code-property: #a66b3f;
+  --code-keyword: #8059a0;
+  --code-string: #4f8561;
+  --code-function: #49649b;
+  --code-property: #b36a35;
 
   --accent-primary-soft: rgba(82, 101, 143, 0.12);
   --accent-secondary-soft: rgba(122, 100, 148, 0.12);
@@ -127,26 +127,26 @@ html[data-theme='dark'] {
   --editor-surface: #20242c;
   --editor-gutter: #1a1d23;
   --text-primary: #e6e8eb;
-  --text-secondary: #b7bcc4;
+  --text-secondary: #c1c6cd;
   --text-muted: #9aa0a8;
   --text-inverse: #181a1f;
   --border: #343943;
   --border-subtle: rgba(230, 232, 235, 0.075);
   --border-strong: rgba(230, 232, 235, 0.18);
 
-  --accent-primary: #8ca4d4;
-  --accent-primary-hover: #aec0e4;
-  --accent-secondary: #b09ad1;
-  --accent-success: #8eb79b;
-  --accent-warning: #d29a68;
-  --accent-rust: #ce846f;
-  --accent-teal: #86b8b2;
-  --accent-blue-gray: #8aa8ba;
+  --accent-primary: #8aaef0;
+  --accent-primary-hover: #b4c9f4;
+  --accent-secondary: #c09be6;
+  --accent-success: #86c99a;
+  --accent-warning: #eba35e;
+  --accent-rust: #e38269;
+  --accent-teal: #79cbc2;
+  --accent-blue-gray: #82b8d3;
 
-  --code-keyword: #b09ad1;
-  --code-string: #8eb79b;
-  --code-function: #8ca4d4;
-  --code-property: #d29a68;
+  --code-keyword: #c09be6;
+  --code-string: #86c99a;
+  --code-function: #8aaef0;
+  --code-property: #eba35e;
 
   --accent-primary-soft: rgba(140, 164, 212, 0.13);
   --accent-secondary-soft: rgba(176, 154, 209, 0.13);

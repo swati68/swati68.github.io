@@ -25,7 +25,7 @@ export const toolkitGroups = [
   },
   {
     title: 'BACKEND',
-    items: ['Spring Boot', 'FastAPI', 'REST APIs', 'Microservices'],
+    items: ['Spring Boot', 'FastAPI', 'REST APIs', 'Microservices', 'Node.js'],
   },
   {
     title: 'FRONTEND',

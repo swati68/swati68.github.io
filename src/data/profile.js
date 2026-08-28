@@ -48,54 +48,53 @@ export const heroActions = [
     icon: 'resume',
   },
   {
-    id: 'linkedin',
-    label: 'LinkedIn',
-    href: profileLinks.linkedin,
-    icon: 'linkedin',
-  },
-  {
     id: 'github',
     label: 'GitHub',
     href: profileLinks.github,
     icon: 'github',
   },
+  {
+    id: 'linkedin',
+    label: 'LinkedIn',
+    href: profileLinks.linkedin,
+    icon: 'linkedin',
+  },
 ]
 
 export const hero = {
   title: "Hi, I'm Swati Singh.",
-  statement: 'Software Engineer, graduate student, and AI/ML researcher.',
+  statement: 'Graduate Student @ NYU, AI/ML Researcher and Software Engineer.',
   description:
-    "I spent three years building production backend systems in fintech before moving to New York for my M.S. in Computer Science at NYU. Today, my work spans software systems, machine learning, and healthcare research.",
-  status: 'Open to Spring 2027 Internship/ New Grad 2027 Opportunities',
+    'Before grad school, I spent three years building backend and production systems in fintech. These days, I work across software engineering, machine learning, and research.',
+  status: 'Open to Spring 2027 internships and New Grad 2027 full-time opportunities',
 }
 
 export const about = {
   label: '01 / ABOUT',
   heading: 'About Me',
   paragraphs: [
-    'I started in backend engineering, where I learned how much good systems work depends on clear interfaces, careful tradeoffs, and calm debugging under production pressure.',
-    'After three years at Bajaj Finserv, I moved to New York for graduate school at NYU. My work now sits across software systems, machine learning, and healthcare research, with a focus on building things that are technically solid and genuinely useful.',
+    'I started out as a backend engineer, working mostly with Java and production systems at Bajaj Finserv. After a few years in industry, I wanted to explore machine learning and research more seriously, which brought me to NYU for graduate school.',
+    'My work now ranges from healthcare research and machine learning to the occasional side project that lets me experiment with a completely different problem.',
   ],
   focusCards: [
-  {
-    title: 'Software Engineering',
-    detail: 'Backend systems, REST APIs, microservices, and production reliability.',
-  },
-  {
-    title: 'AI / ML',
-    detail: 'Model pipelines, NLP workflows, LLM APIs, and GPU-backed inference.',
-  },
-  {
-    title: 'Research Engineering',
-    detail: 'Healthcare AI, clinical data, social determinants of health, and evaluation.',
-  },
+    {
+      title: 'Software Engineering',
+      detail: 'Backend systems, REST APIs, microservices, and production reliability.',
+    },
+    {
+      title: 'AI / ML',
+      detail: 'Model pipelines, NLP workflows, LLM APIs, and GPU-backed inference.',
+    },
+    {
+      title: 'Research Engineering',
+      detail: 'Healthcare AI, clinical data, social determinants of health, and evaluation.',
+    },
   ],
   metadata: [
-    { label: 'LOCATION', value: 'New York' },
+    { label: 'LOCATION', value: 'New York City' },
     { label: 'CURRENT', value: 'M.S. Computer Science @ NYU' },
-    { label: 'PREVIOUS', value: 'Bajaj Finserv' },
-    { label: 'INTERESTS', value: 'ML Systems · AI · Backend' },
-    { label: 'WORK STYLE', value: 'Deep Work' },
+    { label: 'PREVIOUS', value: 'Senior Software Engineer @ Bajaj Finserv' },
+    { label: 'FOCUS', value: 'ML Systems · AI · Backend' },
   ],
 }
 
